@@ -8,7 +8,8 @@ Download adjusted daily OHLCV for 25 fixed US stocks.
 2, collect_fundamentals.py      
 Download SEC companyfacts JSON into data/sec_raw/.
 
-3, build_fundamental_features.py
+3, build_fundamental_features.py 
+
 Produce financial features using filing availability.
 
 4, build_ranking_dataset.py     
@@ -21,12 +22,15 @@ Join available financial data to weekly stock rows.
 Local credentials
 
 7, main.py
+
 Runs the entire pipeline
 
 8, predict.py
+
 Loads the model and generates the latest rankings
 
 9, buld_features.py
+
 Creates technical features and combines fundamentals
 
 How to use
