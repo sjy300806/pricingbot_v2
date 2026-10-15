@@ -1,8 +1,0 @@
-alpaca-py
-python-dotenv
-pandas
-numpy
-scipy
-scikit-learn
-lightgbm
-requests
