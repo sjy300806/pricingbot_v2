@@ -61,12 +61,21 @@ In powershell:
 What the bot generates:
 
 your folder/
+
 ├── data/
+
 │   ├── stocks_daily_adjusted.csv
+
 │   ├── fundamental_features.csv
+
 │   └── weekly_features.csv
+
 ├── models/
+
 │   ├── ranker.joblib
+
 │   └── model_info.json
+
 └── output/
+
     └── rankings_YYYYMMDD.csv
