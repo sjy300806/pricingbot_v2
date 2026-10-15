@@ -1,3 +1,5 @@
+The bot collects the latest daily price and trading volume data for 25 selected stocks using the Alpaca API, while retrieving publicly available company financial information from SEC EDGAR. It then processes these datasets to generate technical indicators, such as historical returns, volatility, and momentum, alongside fundamental indicators, such as revenue growth, profit margins, and financial ratios. These features are combined into a dataset used to train a LightGBM machine learning model on historical stock performance. Once trained, the model evaluates the latest market data and predicts each stock's relative performance over the next five trading days. Finally, the bot ranks all 25 stocks according to their predicted returns and generates a CSV file containing the rankings and the five highest-ranked stocks as potential investment candidates.
+
 Files:
 
 1, collect_stocks.py            
@@ -17,6 +19,15 @@ Join available financial data to weekly stock rows.
 
 6, .env     
 Local credentials
+
+7, main.py
+Runs the entire pipeline
+
+8, predict.py
+Loads the model and generates the latest rankings
+
+9, buld_features.py
+Creates technical features and combines fundamentals
 
 How to use
 
