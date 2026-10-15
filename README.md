@@ -78,4 +78,6 @@ your folder/
 
 └── output/
 
-    └── rankings_YYYYMMDD.csv
+   └── rankings_YYYYMMDD.csv
+    
+
