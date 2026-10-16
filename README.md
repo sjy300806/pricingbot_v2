@@ -33,66 +33,56 @@ Loads the model and generates the latest rankings
 
 Creates technical features and combines fundamentals
 
-How to use
+How to use on macOS (Mac mini)
 
-1, Install Python 3.11 or 3.12 from python.org.
+1. Install Python 3.11 or 3.12 from https://www.python.org/downloads/ .
+   Open Terminal (or VS Code > Terminal > New Terminal) in this project folder.
 
-2, Extract the project and set up its environment
+2. Create and activate a virtual environment:
 
-Open PowerShell in the extracted folder and run this script to create the environment:
+   python3.12 -m venv .venv
+   source .venv/bin/activate
+   python -m pip install -r requirements.txt
 
-then install all the dependencies:
+   If your installed Python command is python3 rather than python3.12,
+   verify `python3 --version` shows 3.11 or 3.12, then use
+   `python3 -m venv .venv` instead.
 
-py -m venv .venv
+3. Edit the included .env file to enter your own Alpaca API key,
+   Alpaca secret key, and real SEC contact email. Do not share .env.
+   Finder hides filenames beginning with a dot by default; in VS Code
+   it should appear in the Explorer. On Mac Finder, press Command+Shift+.
+   to toggle hidden files.
 
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+4. To run the entire active pipeline (downloads, feature generation,
+   training, and latest ranking):
 
-3, Configure the APIs
+   python main.py
 
-Open the .env file, then enter your own Alpaca API credentials and real SEC contact email.
-API keys should never be shared with anyone as part of your personal .env.
+   Or run its individual stages in this exact order:
 
-4, Collect and prepare historical data
+   python collect_stocks.py
+   python collect_fundamentals.py --refresh
+   python build_fundamental_features.py
+   python build_features.py
+   python train_model.py
+   python predict.py
 
-Run:
+   Note: build_ranking_dataset.py and merge_fundamentals.py are alternate
+   standalone dataset-building scripts and are not called by main.py.
+   Do not substitute them for build_features.py in the active pipeline.
 
-.\.venv\Scripts\python.exe collect_stocks.py
+5. Outputs:
+   data/stocks_daily_adjusted.csv
+   data/fundamental_features.csv
+   data/weekly_features.csv
+   models/ranker.joblib
+   models/model_info.json
+   output/rankings_YYYYMMDD.csv
 
-.\.venv\Scripts\python.exe collect_fundamentals.py
-
-.\.venv\Scripts\python.exe build_fundamental_features.py
-
-.\.venv\Scripts\python.exe build_ranking_dataset.py
-
-.\.venv\Scripts\python.exe merge_fundamentals.py
-
-5, Run the bot
-
-In powershell:
-
-.\.venv\Scripts\python.exe main.py
-
-
-What the bot generates:
-
-your folder/
-
-├── data/
-
-│   ├── stocks_daily_adjusted.csv
-
-│   ├── fundamental_features.csv
-
-│   └── weekly_features.csv
-
-├── models/
-
-│   ├── ranker.joblib
-
-│   └── model_info.json
-
-└── output/
-
-   └── rankings_YYYYMMDD.csv
-    
-
+Notes:
+- The first run needs internet access and valid Alpaca credentials.
+- The IEX feed is the default; availability and historical coverage depend
+  on the Alpaca account and data plan.
+- The program creates research rankings; it does not place trades.
+- The code is otherwise unchanged from the uploaded project.
